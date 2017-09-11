@@ -54,8 +54,8 @@ func NewBoundFromMapTile(x, y, z uint64) *Bound {
 		shift = 0
 	}
 
-	lng1, lat1 := scalarMercatorInverse(x<<shift, y<<shift, 31)
-	lng2, lat2 := scalarMercatorInverse((x+1)<<shift, (y+1)<<shift, 31)
+	lng1, lat1 := scalarMercatorInverse(float64(x<<shift), float64(y<<shift), 31)
+	lng2, lat2 := scalarMercatorInverse(float64((x+1)<<shift), float64((y+1)<<shift), 31)
 
 	return &Bound{
 		sw: &Point{math.Min(lng1, lng2), math.Min(lat1, lat2)},

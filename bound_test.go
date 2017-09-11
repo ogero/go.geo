@@ -71,22 +71,22 @@ func TestNewBoundFromMapTile(t *testing.T) {
 	factor := uint64(5)
 
 	// edges should be within the bounds
-	lng, lat := ScalarMercator.Inverse(7<<factor+1, 8<<factor+1, level)
+	lng, lat := ScalarMercator.Inverse(float64(uint64(7)<<factor)+1, float64(uint64(8)<<factor)+1, level)
 	if !bound.Contains(NewPoint(lng, lat)) {
 		t.Errorf("bound, should contain point")
 	}
 
-	lng, lat = ScalarMercator.Inverse(7<<factor-1, 8<<factor-1, level)
+	lng, lat = ScalarMercator.Inverse(float64(uint64(7)<<factor)-1, float64(uint64(8)<<factor)-1, level)
 	if bound.Contains(NewPoint(lng, lat)) {
 		t.Errorf("bound, should not contain point")
 	}
 
-	lng, lat = ScalarMercator.Inverse(8<<factor-1, 9<<factor-1, level)
+	lng, lat = ScalarMercator.Inverse(float64(uint64(8)<<factor)-1, float64(uint64(9)<<factor)-1, level)
 	if !bound.Contains(NewPoint(lng, lat)) {
 		t.Errorf("bound, should contain point")
 	}
 
-	lng, lat = ScalarMercator.Inverse(8<<factor+1, 9<<factor+1, level)
+	lng, lat = ScalarMercator.Inverse(float64(uint64(8)<<factor)+1, float64(uint64(9)<<factor)+1, level)
 	if bound.Contains(NewPoint(lng, lat)) {
 		t.Errorf("bound, should not contain point")
 	}

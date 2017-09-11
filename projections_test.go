@@ -215,12 +215,12 @@ func TestScalarMercator(t *testing.T) {
 	}
 
 	// specific case
-	if x, y := ScalarMercator.Project(-87.65005229999997, 41.850033, 20); x != 268988 || y != 389836 {
+	if x, y := ScalarMercator.Project(-87.65005229999997, 41.850033, 20); x != 268988.7187763201 || y != 389836.37009860436 {
 		t.Errorf("Scalar Mercator, projection incorrect, got %d %d", x, y)
 	}
 
 	ScalarMercator.Level = 28
-	if x, y := ScalarMercator.Project(-87.65005229999997, 41.850033); x != 68861112 || y != 99798110 {
+	if x, y := ScalarMercator.Project(-87.65005229999997, 41.850033); x != 6.886111200673795e+07 || y != 9.979811074524271e+07 {
 		t.Errorf("Scalar Mercator, projection incorrect, got %d %d", x, y)
 	}
 
@@ -248,7 +248,7 @@ func TestScalarMercator(t *testing.T) {
 	}
 
 	// test polar regions
-	if _, y := ScalarMercator.Project(0, 89.9); y != (1<<ScalarMercator.Level)-1 {
+	if _, y := ScalarMercator.Project(0, 89.9); y != float64(uint64(1)<<ScalarMercator.Level)-1 {
 		t.Errorf("Scalar Mercator, top of the world error, got %d", y)
 	}
 

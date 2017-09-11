@@ -41,7 +41,7 @@ func NewPointFromQuadkey(key int64, level int) *Point {
 		y |= (key & (1 << (2*i + 1))) >> (i + 1)
 	}
 
-	lng, lat := scalarMercatorInverse(uint64(x), uint64(y), uint64(level))
+	lng, lat := scalarMercatorInverse(float64(x), float64(y), uint64(level))
 	return &Point{lng, lat}
 }
 
@@ -136,8 +136,8 @@ func (p *Point) Quadkey(level int) int64 {
 	var i uint
 	var result uint64
 	for i = 0; i < uint(level); i++ {
-		result |= (x & (1 << i)) << i
-		result |= (y & (1 << i)) << (i + 1)
+		result |= (uint64(x) & (1 << i)) << i
+		result |= (uint64(y) & (1 << i)) << (i + 1)
 	}
 
 	return int64(result)
